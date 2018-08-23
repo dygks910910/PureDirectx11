@@ -9,7 +9,6 @@
 #define _CRTDBG_MAP_ALLOC
 #include <crtdbg.h>
 #endif
- 
 #include <d3dx11.h>
 #include "d3dx11Effect.h"
 #include <xnamath.h>

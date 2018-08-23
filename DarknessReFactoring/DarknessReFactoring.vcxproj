@@ -77,6 +77,9 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(MSBuildProjectDirectory)\Include;$(MSBuildProjectDirectory)\Common;$(IncludePath)</IncludePath>
+    <LibraryPath>$(MSBuildProjectDirectory)\Lib\x64;$(MSBuildProjectDirectory)\Common;$(LibraryPath)</LibraryPath>
+    <ExecutablePath>$(MSBuildProjectDirectory)\bin\x64;$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -109,6 +112,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>d3d11.lib;d3dx11d.lib;D3DCompiler.lib;dxerr.lib;dxgi.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -152,6 +156,7 @@
     <ClCompile Include="Common\GameTimer.cpp" />
     <ClCompile Include="Common\LightHelper.cpp" />
     <ClCompile Include="Common\MathHelper.cpp" />
+    <ClCompile Include="InterfaceInput.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -162,6 +167,7 @@
     <ClInclude Include="Common\GameTimer.h" />
     <ClInclude Include="Common\LightHelper.h" />
     <ClInclude Include="Common\MathHelper.h" />
+    <ClInclude Include="InterfaceInput.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

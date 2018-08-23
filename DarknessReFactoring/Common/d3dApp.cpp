@@ -303,7 +303,7 @@ bool D3DApp::InitMainWindow()
 	wc.hInstance     = mhAppInst;
 	wc.hIcon         = LoadIcon(0, IDI_APPLICATION);
 	wc.hCursor       = LoadCursor(0, IDC_ARROW);
-	wc.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
+	wc.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
 	wc.lpszMenuName = 0;
 	wc.lpszClassName = L"D3DWndClassName";
 
@@ -318,7 +318,6 @@ bool D3DApp::InitMainWindow()
 	RECT R = { 0, 0, mClientWidth, mClientHeight };
 	DEVMODE dmScreenSettings;
 
-#define FULL_SCREEN false
 	int width;
 	int height;
 	if (FULL_SCREEN)
@@ -344,10 +343,18 @@ bool D3DApp::InitMainWindow()
 		height = R.bottom - R.top;
 	}
 	
-
+	if(FULL_SCREEN)
 	mhMainWnd = CreateWindowEx(WS_EX_APPWINDOW, L"D3DWndClassName", mMainWndCaption.c_str(), 
 		WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_POPUP, CW_USEDEFAULT, CW_USEDEFAULT,
 		mClientWidth, mClientHeight, 0, 0, mhAppInst, 0); 
+	//fullScreen¿Ã æ∆¥“∂ß
+	else
+	{
+		mhMainWnd = CreateWindowEx(WS_EX_APPWINDOW, L"D3DWndClassName", mMainWndCaption.c_str(),
+			WS_CLIPCHILDREN | WS_VISIBLE | WS_SYSMENU, CW_USEDEFAULT, CW_USEDEFAULT,
+			mClientWidth, mClientHeight, 0, 0, mhAppInst, 0);
+	}
+	//WS_CLIPCHILDREN | WS_VISIBLE | WS_SYSMENU
 	if( !mhMainWnd )
 	{
 		MessageBox(0, L"CreateWindow Failed.", 0, 0);

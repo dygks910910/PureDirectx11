@@ -10,11 +10,14 @@
 
 #ifndef D3DAPP_H
 #define D3DAPP_H
+#define FULL_SCREEN false
 
 #include "d3dUtil.h"
 #include "GameTimer.h"
 #include <string>
 #include<iostream>
+#include"..\InterfaceInput.h"
+
 class D3DApp
 {
 public:
@@ -24,7 +27,6 @@ public:
 	HINSTANCE AppInst()const;
 	HWND      MainWnd()const;
 	float     AspectRatio()const;
-	
 	int Run()
 	{
 		MSG msg = { 0 };
@@ -47,7 +49,11 @@ public:
 				if(temp >= 1.0f/60.0f)
   				{
 					CalculateFrameStats();
+					//Listener
+
+					//Update
 					UpdateScene(temp, msg);
+					//Draw
 					DrawScene();
 					temp = 0;
   				}
@@ -65,10 +71,10 @@ public:
 	// Framework methods.  Derived client class overrides these methods to 
 	// implement specific application requirements.
 
-	virtual bool Init();
-	virtual void OnResize();
-	virtual void UpdateScene(const float& dt,const MSG& msg) {};
-	virtual void DrawScene() {
+	bool Init();
+	void OnResize();
+	void UpdateScene(const float& dt,const MSG& msg) {};
+	void DrawScene() {
 
 	};
 	virtual void OnKeyboardButtonDown(const HWND& hwnd, const UINT& msg,
@@ -76,7 +82,7 @@ public:
 
 	virtual void OnMouseDown(const WPARAM& wParam, const int& x, const int& y) {};
 
-	virtual LRESULT MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+	LRESULT MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 	// Convenience overrides for handling mouse input.
 
@@ -113,5 +119,4 @@ protected:
 	int mClientHeight;
 	bool mEnable4xMsaa;
 };
-
 #endif // D3DAPP_H
